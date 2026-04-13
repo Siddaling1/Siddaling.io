@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S. Siddaling — Data Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #111118;
+    --bg-3: #16161f;
+    --bg-card: #13131a;
+    --border: rgba(255,255,255,0.07);
+    --border-bright: rgba(255,255,255,0.14);
+    --text: #e8e8f0;
+    --text-2: #9898b0;
+    --text-3: #5a5a72;
+    --gold: #c8a96e;
+    --gold-dim: rgba(200,169,110,0.15);
+    --gold-border: rgba(200,169,110,0.25);
+    --teal: #4ecdc4;
+    --teal-dim: rgba(78,205,196,0.1);
+    --blue: #6b8cff;
+    --blue-dim: rgba(107,140,255,0.1);
+    --rose: #ff6b8a;
+    --rose-dim: rgba(255,107,138,0.1);
+    --amber: #ffa447;
+    --amber-dim: rgba(255,164,71,0.1);
+    --radius: 10px;
+    --radius-lg: 16px;
+    --nav-bg: rgba(10,10,15,0.85);
+    --grid-line: rgba(255,255,255,0.025);
+    --glow: rgba(200,169,110,0.06);
+    --shadow: rgba(0,0,0,0.4);
+  }
+
+  /* ─── LIGHT MODE ─── */
+  html.light {
+    --bg: #f5f4ef;
+    --bg-2: #eeede7;
+    --bg-3: #e6e4dc;
+    --bg-card: #faf9f5;
+    --border: rgba(0,0,0,0.08);
+    --border-bright: rgba(0,0,0,0.15);
+    --text: #1a1a24;
+    --text-2: #4a4a62;
+    --text-3: #8a8aa0;
+    --gold: #9a6f2a;
+    --gold-dim: rgba(154,111,42,0.1);
+    --gold-border: rgba(154,111,42,0.2);
+    --teal: #0d8a82;
+    --teal-dim: rgba(13,138,130,0.08);
+    --blue: #2d5fd4;
+    --blue-dim: rgba(45,95,212,0.08);
+    --rose: #c4284a;
+    --rose-dim: rgba(196,40,74,0.08);
+    --amber: #b8620a;
+    --amber-dim: rgba(184,98,10,0.08);
+    --nav-bg: rgba(245,244,239,0.9);
+    --grid-line: rgba(0,0,0,0.04);
+    --glow: rgba(154,111,42,0.05);
+    --shadow: rgba(0,0,0,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── BACKGROUND GRID ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Radial glow top-left */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px; left: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.25rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12.5px;
+    color: var(--text-2);
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 148px 0 100px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1.75rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 4.8rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.75rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-tagline {
+    font-size: 1.05rem;
+    color: var(--text-2);
+    line-height: 1.8;
+    margin-bottom: 2.75rem;
+    max-width: 480px;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: #0a0a0f;
+    padding: 13px 26px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover { background: #dfc08a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,169,110,0.3); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text-2);
+    padding: 13px 26px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 400;
+    text-decoration: none;
+    border: 1px solid var(--border-bright);
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
+
+  /* HERO CARD */
+  .hero-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .hero-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #0a0a0f;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .hero-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: .2rem;
+    color: var(--text);
+  }
+  .hero-card-role {
+    font-size: 11.5px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .65rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-stat {
+    background: var(--bg-3);
+    border-radius: 10px;
+    padding: .75rem;
+    border: 1px solid var(--border);
+  }
+  .hero-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat-lbl { font-size: 11px; color: var(--text-3); }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(78,205,196,0.1);
+    color: var(--teal);
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 11.5px;
+    font-weight: 500;
+    border: 1px solid rgba(78,205,196,0.2);
+  }
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.75); }
+  }
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-bright), transparent);
+    margin: 0;
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 88px 0; }
+  .sec-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: .75rem;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-eyebrow::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .sec-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 2.75rem;
+    color: var(--text);
+  }
+  .sec-heading span { color: var(--gold); font-style: italic; }
+
+  /* ─── SUMMARY ─── */
+  .summary-layout {
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  .summary-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-2);
+    font-weight: 300;
+  }
+  .summary-text strong { color: var(--text); font-weight: 500; }
+  .summary-aside {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .aside-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .875rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .875rem;
+    transition: border-color 0.2s;
+  }
+  .aside-item:hover { border-color: var(--border-bright); }
+  .aside-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ai-blue { background: var(--blue-dim); color: var(--blue); }
+  .ai-teal { background: var(--teal-dim); color: var(--teal); }
+  .ai-amber { background: var(--amber-dim); color: var(--amber); }
+  .ai-rose { background: var(--rose-dim); color: var(--rose); }
+  .ai-green { background: rgba(78,205,150,0.1); color: #4ecd96; }
+  .aside-label { font-size: 10.5px; color: var(--text-3); margin-bottom: 2px; letter-spacing: 0.03em; }
+  .aside-val { font-size: 13px; font-weight: 500; color: var(--text); }
+
+  /* ─── SKILLS ─── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .skill-cat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-cat:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+  .skill-cat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .skill-cat.prog::before { background: var(--blue); }
+  .skill-cat.viz::before  { background: var(--teal); }
+  .skill-cat.tech::before { background: var(--amber); }
+  .skill-cat.soft::before { background: var(--rose); }
+  .skill-cat-title {
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.1rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .skill-cat.prog .skill-cat-title { color: var(--blue); }
+  .skill-cat.viz  .skill-cat-title { color: var(--teal); }
+  .skill-cat.tech .skill-cat-title { color: var(--amber); }
+  .skill-cat.soft .skill-cat-title { color: var(--rose); }
+  .pill {
+    display: inline-block;
+    font-size: 11.5px;
+    padding: 4px 11px;
+    border-radius: 100px;
+    margin: 3px 2px;
+    font-weight: 400;
+    border: 1px solid;
+  }
+  .pill-blue  { background: var(--blue-dim);  color: var(--blue);  border-color: rgba(107,140,255,0.2); }
+  .pill-teal  { background: var(--teal-dim);  color: var(--teal);  border-color: rgba(78,205,196,0.2); }
+  .pill-amber { background: var(--amber-dim); color: var(--amber); border-color: rgba(255,164,71,0.2); }
+  .pill-rose  { background: var(--rose-dim);  color: var(--rose);  border-color: rgba(255,107,138,0.2); }
+
+  /* ─── PROJECTS ─── */
+  .proj-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .proj-card:hover {
+    border-color: var(--border-bright);
+    box-shadow: 0 12px 50px var(--shadow);
+  }
+  .proj-header {
+    padding: 1.75rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .proj-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    color: rgba(200,169,110,0.2);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-right: .5rem;
+    align-self: center;
+  }
+  .proj-title-area { flex: 1; }
+  .proj-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: .3rem;
+    color: var(--text);
+  }
+  .proj-title a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .proj-title a:hover { color: var(--gold); }
+  .proj-subtitle { font-size: 12px; color: var(--text-3); letter-spacing: 0.02em; }
+  .proj-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+  .tool-tag {
+    font-size: 11px;
+    padding: 3px 11px;
+    border-radius: 100px;
+    font-weight: 500;
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1px solid var(--border-bright);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .proj-body { padding: 2rem; }
+  .proj-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .proj-sec-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: .6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .proj-sec-label::before {
+    content: '';
+    display: block;
+    width: 14px; height: 1.5px;
+    border-radius: 2px;
+  }
+  .psl-problem { color: var(--rose); }
+  .psl-problem::before { background: var(--rose); }
+  .psl-insights { color: var(--blue); }
+  .psl-insights::before { background: var(--blue); }
+  .psl-impact { color: var(--teal); }
+  .psl-impact::before { background: var(--teal); }
+  .psl-neutral { color: var(--text-3); }
+  .psl-neutral::before { background: var(--text-3); }
+  .proj-text {
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: var(--text-2);
+    margin-bottom: 1rem;
+  }
+  .kpi-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin: .75rem 0;
+  }
+  .kpi {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .625rem .875rem;
+    text-align: center;
+    min-width: 78px;
+  }
+  .kpi-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .kpi-lbl { font-size: 10px; color: var(--text-3); line-height: 1.3; }
+  .kpi.kblue .kpi-val  { color: var(--blue); }
+  .kpi.kteal .kpi-val  { color: var(--teal); }
+  .kpi.kamber .kpi-val { color: var(--amber); }
+  .kpi.krose .kpi-val  { color: var(--rose); }
+  .dot-list { list-style: none; padding: 0; }
+  .dot-list li {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-2);
+    padding: .3rem 0 .3rem 1.3rem;
+    position: relative;
+  }
+  .dot-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: .78rem;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+  .dot-list li b { color: var(--text); font-weight: 600; }
+
+  /* ─── DASHBOARDS ─── */
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .dash-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .dash-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-bright);
+    box-shadow: 0 16px 50px var(--shadow);
+  }
+  .dash-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .dash-card.d1::before { background: linear-gradient(90deg, var(--blue),  transparent); }
+  .dash-card.d2::before { background: linear-gradient(90deg, var(--teal),  transparent); }
+  .dash-card.d3::before { background: linear-gradient(90deg, var(--amber), transparent); }
+  .dash-card.d5::before { background: linear-gradient(90deg, var(--blue),  transparent); }
+  .dash-card.d6::before { background: linear-gradient(90deg, var(--teal),  transparent); }
+  .dash-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .dash-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: .5rem;
+    color: var(--text);
+  }
+  .dash-title a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .dash-title a:hover { color: var(--gold); }
+  .dash-desc {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .dash-kpis { display: flex; flex-wrap: wrap; gap: 4px; }
+  .dash-kpi {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 100px;
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  /* ─── CERTIFICATIONS ─── */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.4rem 1.4rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .cert-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+  .cert-stripe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+  .cert-card.c1 .cert-stripe { background: var(--blue); }
+  .cert-card.c2 .cert-stripe { background: var(--teal); }
+  .cert-card.c3 .cert-stripe { background: var(--amber); }
+  .cert-card.c4 .cert-stripe { background: var(--rose); }
+  .cert-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: .25rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .cert-issuer {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-bottom: .875rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cert-skills { display: flex; flex-wrap: wrap; gap: 4px; }
+  .cert-skill {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+
+  /* ─── GITHUB ─── */
+  .github-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .github-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--blue), transparent);
+  }
+  .github-intro {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.8;
+    margin-bottom: 1.75rem;
+    max-width: 580px;
+  }
+  .github-intro strong { color: var(--text); font-weight: 500; }
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .875rem;
+  }
+  .repo-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .repo-card:hover { border-color: rgba(107,140,255,0.3); }
+  .repo-name {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--blue);
+    margin-bottom: .3rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .repo-desc {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.55;
+    margin-bottom: .75rem;
+  }
+  .repo-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .lang-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 3rem;
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--teal), transparent);
+  }
+  #contact .sec-eyebrow { color: var(--gold); }
+  #contact .sec-heading { color: var(--text); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .contact-item {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-item:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+  .contact-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--text-3);
+    margin-bottom: .4rem;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .contact-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .contact-val a { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
+  .contact-val a:hover { opacity: 0.75; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem 0 3rem;
+    color: var(--text-3);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ─── THEME TOGGLE ─── */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-3);
+    border: 1px solid var(--border-bright);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--text-2);
+    letter-spacing: 0.03em;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    user-select: none;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover {
+    border-color: var(--gold-border);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+  .theme-toggle .toggle-icon {
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.4s ease;
+  }
+  html.light .theme-toggle .toggle-icon { transform: rotate(180deg); }
+  .theme-toggle .toggle-label { line-height: 1; }
+
+  /* smooth theme transition */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+  }
+  /* preserve animation elements */
+  .fade-up, .status-dot { transition: none !important; }
+  .fade-up.visible { transition: opacity 0.65s ease, transform 0.65s ease !important; }
+  .status-dot { animation: pulse 2s infinite !important; }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    .summary-layout { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .proj-cols { grid-template-columns: 1fr; }
+    .dash-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .repo-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 540px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .repo-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .wrapper { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">S. SIDDALING</a>
+    <ul class="nav-links">
+      <li><a href="#summary">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="wrapper">
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="fade-up">
+        <div class="hero-eyebrow">Data Analyst · Open to Work</div>
+        <h1>Turning data into <em>business decisions</em></h1>
+        <p class="hero-tagline">I transform raw, messy datasets into clear, decision-ready insights — using Excel, Python, SQL, and Power BI to answer questions that actually move the needle.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">View Projects →</a>
+          <a href="mailto:youremail@gmail.com" class="btn-secondary">Get in touch</a>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <div class="hero-card">
+          <div class="hero-avatar">SS</div>
+          <p class="hero-card-name">S. SIDDALING</p>
+          <p class="hero-card-role">Data Analyst · Hyderabad</p>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-val">4</div>
+              <div class="hero-stat-lbl">End-to-end Projects</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">500K+</div>
+              <div class="hero-stat-lbl">Records Analyzed</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">3</div>
+              <div class="hero-stat-lbl">Power BI Dashboards</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">4</div>
+              <div class="hero-stat-lbl">Certifications</div>
+            </div>
+          </div>
+          <span class="status-pill"><span class="status-dot"></span>Available for opportunities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── SUMMARY ─── -->
+  <section id="summary">
+    <p class="sec-eyebrow">About</p>
+    <h2 class="sec-heading">Professional <span>Summary</span></h2>
+    <div class="summary-layout fade-up">
+      <p class="summary-text">
+        Results-oriented <strong>Data Analyst</strong> with hands-on experience delivering end-to-end analytics solutions across transportation, retail, energy, and consumer domains. Proficient in <strong>Python (Pandas, NumPy, Matplotlib, Seaborn)</strong>, <strong>SQL (MySQL, PostgreSQL)</strong>, and <strong>Power BI</strong> for transforming messy, real-world datasets into actionable business intelligence.
+        <br><br>
+        Skilled in the full analytics pipeline — from data acquisition and cleaning to exploratory analysis, statistical modeling, and stakeholder-ready dashboards. Passionate about <strong>quantifying business impact</strong> and communicating insights that drive operational and strategic decisions. Certified in Google Data Analytics and Microsoft Power BI, with a portfolio of projects spanning 100K+ record datasets, KPI-driven dashboards, and cross-functional analyses.
+      </p>
+      <div class="summary-aside">
+        <div class="aside-item">
+          <div class="aside-icon ai-green">Ex</div>
+          <div>
+            <div class="aside-label">Transformation</div>
+            <div class="aside-val">Excel · Pivot Tables</div>
+          </div>
+        </div>
+        <div class="aside-item">
+          <div class="aside-icon ai-blue">Py</div>
+          <div>
+            <div class="aside-label">Primary Language</div>
+            <div class="aside-val">Python · Pandas · NumPy</div>
+          </div>
+        </div>
+        <div class="aside-item">
+          <div class="aside-icon ai-teal">BI</div>
+          <div>
+            <div class="aside-label">Visualization Stack</div>
+            <div class="aside-val">Power BI · Matplotlib · Plotly</div>
+          </div>
+        </div>
+        <div class="aside-item">
+          <div class="aside-icon ai-amber">SQL</div>
+          <div>
+            <div class="aside-label">Database Querying</div>
+            <div class="aside-val">MySQL</div>
+          </div>
+        </div>
+        <div class="aside-item">
+          <div class="aside-icon ai-rose">ML</div>
+          <div>
+            <div class="aside-label">Modeling</div>
+            <div class="aside-val">Scikit-learn · SHAP · SMOTE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── SKILLS ─── -->
+  <section id="skills">
+    <p class="sec-eyebrow">Competencies</p>
+    <h2 class="sec-heading">Core <span>Skills</span></h2>
+    <div class="skills-grid fade-up">
+      <div class="skill-cat prog">
+        <p class="skill-cat-title">Programming & Querying</p>
+        <span class="pill pill-blue">Python</span>
+        <span class="pill pill-blue">SQL</span>
+        <span class="pill pill-blue">Pandas</span>
+        <span class="pill pill-blue">NumPy</span>
+        <span class="pill pill-blue">Seaborn</span>
+        <span class="pill pill-blue">Matplotlib</span>
+      </div>
+      <div class="skill-cat viz">
+        <p class="skill-cat-title">Visualization & Reporting</p>
+        <span class="pill pill-teal">Power BI</span>
+        <span class="pill pill-teal">DAX</span>
+        <span class="pill pill-teal">Power Query</span>
+        <span class="pill pill-teal">Excel Advanced</span>
+        <span class="pill pill-teal">Plotly</span>
+        <span class="pill pill-teal">Pivot Tables</span>
+      </div>
+      <div class="skill-cat tech">
+        <p class="skill-cat-title">Analytics Techniques</p>
+        <span class="pill pill-amber">EDA</span>
+        <span class="pill pill-amber">Data Cleaning</span>
+        <span class="pill pill-amber">Feature Engineering</span>
+        <span class="pill pill-amber">Trend Analysis</span>
+      </div>
+      <div class="skill-cat soft">
+        <p class="skill-cat-title">Tools & Workflow</p>
+        <span class="pill pill-rose">Git & GitHub</span>
+        <span class="pill pill-rose">Jupyter Notebook</span>
+        <span class="pill pill-rose">Google Sheets</span>
+        <span class="pill pill-rose">VS Code</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── PROJECTS ─── -->
+  <section id="projects">
+    <p class="sec-eyebrow">Work</p>
+    <h2 class="sec-heading">Featured <span>Projects</span></h2>
+
+    <!-- Project 1 -->
+    <div class="proj-card fade-up">
+      <div class="proj-header">
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span class="proj-num">01</span>
+          <div class="proj-title-area">
+            <p class="proj-title"><a href="https://github.com/Siddaling1/public_transport_delays" target="_blank">Public Transport Delay Analysis</a></p>
+            <p class="proj-subtitle">Urban Mobility · Operational Efficiency · Root-Cause Analysis</p>
+          </div>
+        </div>
+        <div class="proj-tools">
+          <span class="tool-tag">Python</span><span class="tool-tag">Pandas</span><span class="tool-tag">Seaborn</span><span class="tool-tag">SQL</span><span class="tool-tag">Power BI</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cols">
+          <div>
+            <p class="proj-sec-label psl-problem">Problem Statement</p>
+            <p class="proj-text">A city transport authority was experiencing rising passenger dissatisfaction with no clear data-driven view of where, when, and why delays were concentrated. The goal: diagnose systemic bottlenecks and recommend operational changes projected to reduce average delay by 15%.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Dataset</p>
+            <p class="proj-text">120K+ trip records across 40 bus routes, 6 months — including departure times, scheduled vs. actual arrival, route ID, weather flag, and peak/off-peak tags.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Approach</p>
+            <ul class="dot-list">
+              <li>Cleaned 8% missing/malformed timestamps; standardized route ID formats across 3 data sources</li>
+              <li>Engineered delay severity tiers (0–5 min, 5–15 min, 15+ min) for risk segmentation</li>
+              <li>Time-series analysis across hour-of-day and day-of-week to surface delay seasonality</li>
+              <li>Chi-square test to quantify weather flag vs. delay magnitude correlation</li>
+            </ul>
+          </div>
+          <div>
+            <p class="proj-sec-label psl-insights">Key Insights</p>
+            <div class="kpi-strip">
+              <div class="kpi kblue"><div class="kpi-val">34%</div><div class="kpi-lbl">delays in 2 routes</div></div>
+              <div class="kpi kteal"><div class="kpi-val">7–9 AM</div><div class="kpi-lbl">peak delay window</div></div>
+              <div class="kpi kamber"><div class="kpi-val">2.4×</div><div class="kpi-lbl">rain delay factor</div></div>
+              <div class="kpi krose"><div class="kpi-val">18 min</div><div class="kpi-lbl">avg delay Route 12</div></div>
+            </div>
+            <ul class="dot-list" style="margin-top:.75rem">
+              <li>Routes 12 and 27 accounted for <b>34% of all severe delays</b> while serving only 18% of passengers</li>
+              <li>Delays on rainy days were <b>2.4× higher</b> on routes with non-covered stops</li>
+              <li>Off-peak scheduling gaps of 22+ minutes correlated with next-trip overcrowding and cascading delays</li>
+            </ul>
+            <p class="proj-sec-label psl-impact" style="margin-top:1rem">Business Impact</p>
+            <p class="proj-text">Recommendations: rebalance frequency on Routes 12 & 27 during AM peak, projecting <b>22% reduction</b> in total delay-minutes. Infrastructure note flagged 6 uncovered stops with the highest rainy-day delay scores.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="proj-card fade-up">
+      <div class="proj-header">
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span class="proj-num">02</span>
+          <div class="proj-title-area">
+            <p class="proj-title"><a href="https://github.com/Siddaling1/Walmart-sales-performance-analysis" target="_blank">Walmart Sales Performance Analysis</a></p>
+            <p class="proj-subtitle">Retail Analytics · Forecasting · Store Benchmarking</p>
+          </div>
+        </div>
+        <div class="proj-tools">
+          <span class="tool-tag">Python</span><span class="tool-tag">Scikit-learn</span><span class="tool-tag">SQL</span><span class="tool-tag">Excel</span><span class="tool-tag">Power BI</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cols">
+          <div>
+            <p class="proj-sec-label psl-problem">Problem Statement</p>
+            <p class="proj-text">With 45 stores and 3 years of weekly sales data, the challenge was identifying underperforming stores against forecast, and determining whether macroeconomic indicators (CPI, fuel price, unemployment) correlated with sales variance.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Dataset</p>
+            <p class="proj-text">Walmart Kaggle dataset — 421,570 rows, 45 stores, 99 departments, weekly sales figures, holiday flags, temperature, fuel price, CPI, and unemployment rate.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Approach</p>
+            <ul class="dot-list">
+              <li>Store and department-level aggregation using Pandas multi-index groupby</li>
+              <li>Linear regression to quantify CPI and unemployment impact on weekly sales (R² = 0.71)</li>
+              <li>Holiday vs. non-holiday sales lift via Welch's t-test — statistically significant result</li>
+              <li>Store efficiency ranking by revenue output and YoY growth rate</li>
+            </ul>
+          </div>
+          <div>
+            <p class="proj-sec-label psl-insights">Key Insights</p>
+            <div class="kpi-strip">
+              <div class="kpi kblue"><div class="kpi-val">+6.8%</div><div class="kpi-lbl">holiday sales lift</div></div>
+              <div class="kpi kteal"><div class="kpi-val">Top 10</div><div class="kpi-lbl">stores = 42% revenue</div></div>
+              <div class="kpi kamber"><div class="kpi-val">−0.31</div><div class="kpi-lbl">unemp. correlation</div></div>
+              <div class="kpi krose"><div class="kpi-val">Dept 92</div><div class="kpi-lbl">highest growth dept</div></div>
+            </div>
+            <ul class="dot-list" style="margin-top:.75rem">
+              <li>Holiday weeks drove <b>+6.8% average sales lift</b> — Thanksgiving and Super Bowl highest performers</li>
+              <li>Unemployment showed a <b>moderate negative correlation (−0.31)</b> with weekly sales in Type-A stores</li>
+              <li>Top 10 stores generated 42% of total revenue; bottom 10 averaged 61% of median store output</li>
+            </ul>
+            <p class="proj-sec-label psl-impact" style="margin-top:1rem">Business Impact</p>
+            <p class="proj-text">Insight package recommending inventory pre-loading for Thanksgiving + Super Bowl windows. Targeted promotions proposed for underperforming stores in high-unemployment zip codes. Regression model achieved <b>R² of 0.71</b>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="proj-card fade-up">
+      <div class="proj-header">
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span class="proj-num">03</span>
+          <div class="proj-title-area">
+            <p class="proj-title"><a href="https://github.com/Siddaling1/Global-Renewable-Energy-Production" target="_blank">Renewable Energy Trends (2000–2023)</a></p>
+            <p class="proj-subtitle">Energy Analytics · Policy Intelligence · Geospatial Trends</p>
+          </div>
+        </div>
+        <div class="proj-tools">
+          <span class="tool-tag">Python</span><span class="tool-tag">Plotly</span><span class="tool-tag">K-Means</span><span class="tool-tag">Power BI</span><span class="tool-tag">Excel</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cols">
+          <div>
+            <p class="proj-sec-label psl-problem">Problem Statement</p>
+            <p class="proj-text">As global energy policy debates intensify, stakeholders need a reliable analytical view of renewable energy adoption trajectories by country, source, and decade. This project delivers a 23-year trend analysis designed for energy policy teams and ESG-focused investors.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Dataset</p>
+            <p class="proj-text">Our World in Data — 200+ countries, 23 years, covering solar, wind, hydro, and bioenergy capacity in GW and as percentage of total energy mix.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Approach</p>
+            <ul class="dot-list">
+              <li>Longitudinal trend analysis using rolling averages and CAGR per country-source pair</li>
+              <li>K-Means clustering to classify countries into 4 adoption tiers (early-adopter, growing, laggard, fossil-dependent)</li>
+              <li>Choropleth map built with Plotly Express for 2023 renewable share by country</li>
+              <li>YoY delta analysis to detect policy-shift inflection points</li>
+            </ul>
+          </div>
+          <div>
+            <p class="proj-sec-label psl-insights">Key Insights</p>
+            <div class="kpi-strip">
+              <div class="kpi kblue"><div class="kpi-val">+340%</div><div class="kpi-lbl">solar CAGR 2010–23</div></div>
+              <div class="kpi kteal"><div class="kpi-val">42%</div><div class="kpi-lbl">EU renewable share</div></div>
+              <div class="kpi kamber"><div class="kpi-val">2015</div><div class="kpi-lbl">key inflection year</div></div>
+              <div class="kpi krose"><div class="kpi-val">Top 3</div><div class="kpi-lbl">CN · US · DE</div></div>
+            </div>
+            <ul class="dot-list" style="margin-top:.75rem">
+              <li>Solar capacity grew <b>340% globally from 2010–2023</b>, outpacing all other renewable sources</li>
+              <li>Post-Paris Agreement (2015): wind + solar adoption accelerated <b>2.7× in signatory nations</b></li>
+              <li>India's renewable share crossed <b>20% in 2021</b>, driven almost entirely by solar investment</li>
+            </ul>
+            <p class="proj-sec-label psl-impact" style="margin-top:1rem">Business Impact</p>
+            <p class="proj-text">ESG investor briefing deck with country-level opportunity scoring for renewable infrastructure investment. Highest-ROI markets flagged based on policy momentum and current renewable share gap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="proj-card fade-up">
+      <div class="proj-header">
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span class="proj-num">04</span>
+          <div class="proj-title-area">
+            <p class="proj-title">
+              <a href="https://github.com/Siddaling1/Retail-Sales-Profit-Analysis" target="_blank">
+                Retail Sales &amp; Profit Analysis (2015–2023)
+              </a>
+            </p>
+            <p class="proj-subtitle">Business Intelligence · Profit Optimization · Customer Segmentation</p>
+          </div>
+        </div>
+        <div class="proj-tools">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">SQL</span>
+          <span class="tool-tag">Power BI</span>
+          <span class="tool-tag">Excel</span>
+          <span class="tool-tag">Pandas</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cols">
+          <div>
+            <p class="proj-sec-label psl-problem">Problem Statement</p>
+            <p class="proj-text">Retail businesses generate large volumes of transactional data but often lack visibility into profit drivers, discount impact, and regional performance. This project delivers a multi-year analytical solution to uncover profitability gaps and optimize business strategy.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Dataset</p>
+            <p class="proj-text">Retail transactional dataset covering orders, sales, profit, discount, product categories, customer segments, and regional performance across multiple years.</p>
+            <p class="proj-sec-label psl-neutral" style="margin-top:1rem">Approach</p>
+            <ul class="dot-list">
+              <li>Exploratory Data Analysis (EDA) to identify sales and profit patterns</li>
+              <li>Profitability analysis across categories, sub-categories, and regions</li>
+              <li>Time-series trend analysis for monthly and yearly performance</li>
+              <li>Discount vs Profit correlation analysis to detect loss drivers</li>
+              <li>Customer segmentation analysis across Consumer, Corporate, and Home Office</li>
+            </ul>
+          </div>
+          <div>
+            <p class="proj-sec-label psl-insights">Key Insights</p>
+            <div class="kpi-strip">
+              <div class="kpi kblue"><div class="kpi-val">-25%</div><div class="kpi-lbl">profit drop in high discount segments</div></div>
+              <div class="kpi kteal"><div class="kpi-val">+45%</div><div class="kpi-lbl">Technology profit share</div></div>
+              <div class="kpi kamber"><div class="kpi-val">Top Region</div><div class="kpi-lbl">West leads revenue</div></div>
+              <div class="kpi krose"><div class="kpi-val">Consumer</div><div class="kpi-lbl">highest sales segment</div></div>
+            </div>
+            <ul class="dot-list" style="margin-top:.75rem">
+              <li>High discounts directly correlate with <b>negative profit in multiple sub-categories</b></li>
+              <li>Technology category contributes the <b>highest profit margins</b> across all segments</li>
+              <li>West region generates strong revenue but <b>profit varies by category</b></li>
+              <li>Corporate segment delivers <b>better margins despite lower sales volume</b></li>
+            </ul>
+            <p class="proj-sec-label psl-impact" style="margin-top:1rem">Business Impact</p>
+            <p class="proj-text">Developed a decision-support dashboard enabling businesses to identify loss-making products, optimize discount strategies, and improve regional profitability through data-driven insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── DASHBOARDS ─── -->
+  <section id="dashboards">
+    <p class="sec-eyebrow">Dashboards</p>
+    <h2 class="sec-heading">Power BI <span>Dashboards</span></h2>
+    <div class="dash-grid fade-up">
+      <div class="dash-card d1">
+        <div class="dash-icon" style="background:var(--blue-dim);color:var(--blue)">PBI</div>
+        <p class="dash-title"><a href="https://github.com/Siddaling1/HealthScope-Analytics-End-to-End-Healthcare-Intelligence-Dashboard" target="_blank">Healthcare Performance &amp; Patient Insights Dashboard</a></p>
+        <p class="dash-desc">Real-time healthcare analytics dashboard tracking patient visits, waiting time, and satisfaction metrics. Designed for hospital administrators to monitor operational efficiency and improve patient experience.</p>
+        <div class="dash-kpis">
+          <span class="dash-kpi">Total Patients</span>
+          <span class="dash-kpi">Avg Wait Time</span>
+          <span class="dash-kpi">Satisfaction Score</span>
+          <span class="dash-kpi">Dept Load</span>
+        </div>
+      </div>
+      <div class="dash-card d2">
+        <div class="dash-icon" style="background:var(--teal-dim);color:var(--teal)">PBI</div>
+        <p class="dash-title"><a href="https://github.com/Siddaling1/Election_2019" target="_blank">Election 2019 Analytics &amp; Prediction Dashboard</a></p>
+        <p class="dash-desc">Machine learning–driven election analysis covering vote share, candidate demographics, and party performance. Designed to uncover voting patterns and predict outcomes using classification models and statistical insights.</p>
+        <div class="dash-kpis">
+          <span class="dash-kpi">Vote Share %</span>
+          <span class="dash-kpi">Party Seats</span>
+          <span class="dash-kpi">Win Prediction</span>
+          <span class="dash-kpi">Model Accuracy</span>
+        </div>
+      </div>
+      <div class="dash-card d3">
+        <div class="dash-icon" style="background:var(--amber-dim);color:var(--amber)">PBI</div>
+        <p class="dash-title"><a href="https://github.com/Siddaling1/Weather-Data-Analysis" target="_blank">Weather Data Analysis &amp; Insights Dashboard</a></p>
+        <p class="dash-desc">Python-based weather analytics project analyzing temperature, humidity, and wind patterns. Built using Pandas and Matplotlib to uncover trends, seasonal variations, and atmospheric insights.</p>
+        <div class="dash-kpis">
+          <span class="dash-kpi">Avg Temperature</span>
+          <span class="dash-kpi">Humidity %</span>
+          <span class="dash-kpi">Wind Speed</span>
+          <span class="dash-kpi">Weather Trends</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── PYTHON PROJECTS ─── -->
+  <section id="python-projects">
+    <p class="sec-eyebrow">Python</p>
+    <h2 class="sec-heading">Python <span>Projects</span></h2>
+    <div class="dash-grid fade-up">
+      <div class="dash-card d5">
+        <div class="dash-icon" style="background:var(--blue-dim);color:var(--blue)">PY</div>
+        <p class="dash-title">
+          <a href="https://github.com/Siddaling1/Flights-Dataset" target="_blank">Flight Data Analysis &amp; Delay Insights</a>
+        </p>
+        <p class="dash-desc">Analyzed flight data to identify delay patterns, airline performance, and seasonal travel trends using Python-based EDA techniques.</p>
+        <div class="dash-kpis">
+          <span class="dash-kpi">Delay Trends</span>
+          <span class="dash-kpi">Airline Performance</span>
+          <span class="dash-kpi">On-time %</span>
+          <span class="dash-kpi">Seasonality</span>
+        </div>
+      </div>
+      <div class="dash-card d6">
+        <div class="dash-icon" style="background:var(--teal-dim);color:var(--teal)">PY</div>
+        <p class="dash-title">
+          <a href="https://github.com/Siddaling1/Student-Performance-Engagement-Analysis" target="_blank">Student Performance &amp; Engagement Analysis</a>
+        </p>
+        <p class="dash-desc">Explored factors influencing student performance, including demographics, study habits, and engagement levels using Python and data visualization techniques.</p>
+        <div class="dash-kpis">
+          <span class="dash-kpi">Grade Impact</span>
+          <span class="dash-kpi">Feature Correlation</span>
+          <span class="dash-kpi">Engagement Score</span>
+          <span class="dash-kpi">Performance Trends</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── CERTIFICATIONS ─── -->
+  <section id="certifications">
+    <p class="sec-eyebrow">Credentials</p>
+    <h2 class="sec-heading"><span>Certifications</span></h2>
+    <div class="cert-grid fade-up">
+      <div class="cert-card c1">
+        <div class="cert-stripe"></div>
+        <p class="cert-name">Google Data Analytics Professional Certificate</p>
+        <p class="cert-issuer">Google · Coursera · 2024</p>
+        <div class="cert-skills">
+          <span class="cert-skill">SQL</span><span class="cert-skill">R</span><span class="cert-skill">Tableau</span><span class="cert-skill">Data Cleaning</span><span class="cert-skill">Case Studies</span>
+        </div>
+      </div>
+      <div class="cert-card c2">
+        <div class="cert-stripe"></div>
+        <p class="cert-name">Microsoft Power BI Data Analyst (PL-300)</p>
+        <p class="cert-issuer">Microsoft · 2024</p>
+        <div class="cert-skills">
+          <span class="cert-skill">DAX</span><span class="cert-skill">Power Query</span><span class="cert-skill">Data Modeling</span><span class="cert-skill">Report Design</span>
+        </div>
+      </div>
+      <div class="cert-card c3">
+        <div class="cert-stripe"></div>
+        <p class="cert-name">Python for Data Science &amp; Machine Learning</p>
+        <p class="cert-issuer">IBM · Coursera · 2023</p>
+        <div class="cert-skills">
+          <span class="cert-skill">Pandas</span><span class="cert-skill">NumPy</span><span class="cert-skill">Scikit-learn</span><span class="cert-skill">Matplotlib</span>
+        </div>
+      </div>
+      <div class="cert-card c4">
+        <div class="cert-stripe"></div>
+        <p class="cert-name">SQL for Data Analysis</p>
+        <p class="cert-issuer">HackerRank · 2023</p>
+        <div class="cert-skills">
+          <span class="cert-skill">Joins</span><span class="cert-skill">Subqueries</span><span class="cert-skill">Window Functions</span><span class="cert-skill">CTEs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <p class="sec-eyebrow">Connect</p>
+    <h2 class="sec-heading">Let's <span>talk data</span></h2>
+    <div class="contact-grid fade-up">
+      <div class="contact-item">
+        <p class="contact-label">Email</p>
+        <p class="contact-val"><a href="mailto:sollasiddaling@gmail.com">sollasiddaling@gmail.com</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">LinkedIn</p>
+        <p class="contact-val"><a href="https://www.linkedin.com/in/solla-siddaling" target="_blank">linkedin.com/in/solla-siddaling</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">GitHub</p>
+        <p class="contact-val"><a href="https://github.com/Siddaling1" target="_blank">github.com/Siddaling1</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">Phone.No </p>
+        <p class="contact-val"><a href="tel:+917013280278">+91 70132 80278</a></p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>S. SIDDALING · Data Analyst · Hyderabad, India · 2026</p>
+</footer>
+
+<script>
+  // ─── SCROLL ANIMATIONS ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ─── THEME TOGGLE ───
+  const html  = document.documentElement;
+  const btn   = document.getElementById('themeToggle');
+  const icon  = btn.querySelector('.toggle-icon');
+  const label = btn.querySelector('.toggle-label');
+
+  // Restore saved preference
+  if (localStorage.getItem('theme') === 'light') {
+    html.classList.add('light');
+    icon.textContent  = '☀️';
+    label.textContent = 'Light';
+  }
+
+  btn.addEventListener('click', () => {
+    const isLight     = html.classList.toggle('light');
+    icon.textContent  = isLight ? '☀️' : '🌙';
+    label.textContent = isLight ? 'Light' : 'Dark';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>
